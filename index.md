@@ -46,7 +46,7 @@ Our best alternative is a Logistic Regression model. The AUC of the model is 0.6
 <img width="510" alt="image" src="https://user-images.githubusercontent.com/63265930/173683961-c6387b8c-b1a3-4619-a561-2f5bde5ac6bf.png">
 
 ### Modeling Process
-We first started with K-means clustering. When we tried to select the k for K-means, we introduced the idea of regularization via information criteria (IC). Based on the HDIC result, our most optimal k value is 17. However, both BIC and AIC have optimal k values over 50, which may lead to severe overfitting since our dataset contains over 252,000 observations.
+We first started with K-means clustering. When we tried to select the k for K-means, we introduced the idea of regularization via Lasso Regression (L1 Regularization). Based on the HDIC result, our most optimal k value is 17. However, both BIC and AIC have optimal k values over 50, which may lead to severe overfitting since our dataset contains over 252,000 observations.
 
 K-means clustering is an unsupervised method, and we would like to go on and see other supervised methods before jumping to an conclusion.
 
@@ -56,16 +56,33 @@ We then ran the Principal Component Analysis. PCA, however, does not work very e
 
 If we take a closer look at all principal components, we also realized that they are all complicated combinations of large numbers of features, which certainly does not help us to build the model in a more efficient manner.
 
-We shifted our attention to Classification Tree and Regressions. We first
+We shifted our attention to Classification Tree and Regressions. We first ran a Cross Validation for out-of-sample R^2 and out-of-sample accuracy on Classification Tree, Lasso Regression, Post Lasso, and Logistic Regression. 
 
-ran Cross Validation for out-of-sample R^2 and out-of-sample Accuracy on Classification Tree, Lasso, Post
-Lasso, and Logistic Regression (GRAPH E & F). Random Forest was deemed
-time-consuming and not realistic to include in this step due to our hardware limitations.
-All models performed well in the OOS Accuracy test. However, in the OOS R^2 test, the
-numbers are relatively low. We kept that in mind and continued to test the individual
-performance of models from the ROC perspective.
+<img width="689" alt="image" src="https://user-images.githubusercontent.com/63265930/173929423-b81fcd8a-0c32-4677-8ab2-fae8657ca222.png">
 
+<img width="473" alt="image" src="https://user-images.githubusercontent.com/63265930/173929465-bfde8ab6-acb2-4ebe-b953-c7729b16c21e.png">
 
+Our Random Forest, though have a very high accuracy, was deemed too time-consuming and not realistic to be included in this step due to limitations on our computational power. All models performed well in the OOS Accuracy test. In the OOS R^2 test, however, the numbers are relatively low. We kept that in mind and continued to test the individual performance of models from the ROC perspective.
+
+For the Classification Tree, the initial model with all variables failed to deliver a satisfactory result. The AUC of the model was 0.5, which indicates that it is no better than a null model. We tried to use different combinations of independent variables, but nothing seemed to work to improve the performance of the model (see the ROC curve below).
+
+<img width="471" alt="image" src="https://user-images.githubusercontent.com/63265930/173930013-4ff209ae-b938-4b8f-8cbc-b67675a6eef0.png">
+
+We also tested Lasso and Post-Lasso. The OOS accuracies were 0.7898 and 0.7901, respectively; the AUCs were 0.6363 and 0.6367, respectively. These results
+are not very ideal.
+
+By far, the best candidate is the Logistic Regression. The OOS accuracy is 0.7901 and the AUC is 0.6367. Since it is only slightly better than Post-Lasso, our team decided to make a final attempt using Random Forest.
+
+For the Random Forest, we used nodesize=5, ntree=500, and mtry=4. The result was encouraging - the model efficiently identified those who are more likely to default on their loans and flagged them, giving the banks another line of defense when it comes to personal loan applications.
+
+## Evaluation
+The result of the data mining process was evaluated by TPR (True Positive Rate) and FPR (False Positive Rate). A high TPR and low FPR would suggest that the predictive model is well-performing.
+
+Because of our high TPR rate (0.96), nearly all risky customers will be given the risk flag. Serving with risky customers is costly since defaults will cause huge loss to the
+bank. Dealing with default is also time-consuming for the bank. Therefore reducing the
+risk will definitely help the bank on not only cost but also time. With the precise
+prediction on that, banks can reduce a lot of cost on the default customers since they all
+have risk flags.
 
 
 
