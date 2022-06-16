@@ -76,13 +76,15 @@ By far, the best candidate is the Logistic Regression. The OOS accuracy is 0.790
 For the Random Forest, we used nodesize=5, ntree=500, and mtry=4. The result was encouraging - the model efficiently identified those who are more likely to default on their loans and flagged them, giving the banks another line of defense when it comes to personal loan applications.
 
 ## Evaluation
-The result of the data mining process was evaluated by TPR (True Positive Rate) and FPR (False Positive Rate). A high TPR and low FPR would suggest that the predictive model is well-performing.
+The result of the data mining process was evaluated by TPR (True Positive Rate) and FPR (False Positive Rate). A high TPR and low FPR would suggest that the predictive model is well-performing. Because of our high TPR rate (0.96), nearly all risky customers would be successfully identified and given risk flags. 
 
-Because of our high TPR rate (0.96), nearly all risky customers will be given the risk flag. Serving with risky customers is costly since defaults will cause huge loss to the
-bank. Dealing with default is also time-consuming for the bank. Therefore reducing the
-risk will definitely help the bank on not only cost but also time. With the precise
-prediction on that, banks can reduce a lot of cost on the default customers since they all
-have risk flags.
+Risky customers, namely those who have higher chances of defaulting, are very costly since defaults mean huge loss, not just loss in interest and principals, but also all the legal costs in order to retrive the defaulted amount. Dealing with default is also time-consuming for the banks. Reducing such risks, therefore, will definitely help the banks in their lines of business.
+
+On the other hand, FPR is also somthing that we need to think about before deploying the model. For our model of choice, the FPR is relatively low - about 0.2. It
+means only a 20 percent chance that a person with a flag is not risky to have that flag.
+However, in the bank’s view,being conservative in a mortgage market is not a bad thing
+to do. 0.2 is also not so bad that will make the bank lose a large amount of customers
+because of the risk flag given.
 
 
 
