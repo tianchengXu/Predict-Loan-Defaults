@@ -80,13 +80,18 @@ The result of the data mining process was evaluated by TPR (True Positive Rate) 
 
 Risky customers, namely those who have higher chances of defaulting, are very costly since defaults mean huge loss, not just loss in interest and principals, but also all the legal costs in order to retrive the defaulted amount. Dealing with default is also time-consuming for the banks. Reducing such risks, therefore, will definitely help the banks in their lines of business.
 
-On the other hand, FPR is also somthing that we need to think about before deploying the model. For our model of choice, the FPR is relatively low - about 0.2. It
-means only a 20 percent chance that a person with a flag is not risky to have that flag.
-However, in the bank’s view,being conservative in a mortgage market is not a bad thing
-to do. 0.2 is also not so bad that will make the bank lose a large amount of customers
-because of the risk flag given.
+On the other hand, FPR is also somthing that we need to spend considerable amount of time to think about before deploying the model. During our model comparison process, we decided to trade 4% of TPR for a 10% decrease in FPR. For our final model of choice (a Random Forest Model), the FPR is relatively low - about 0.20. It means there is a roughly 20 percent chance that an individual redflagged by the model turns out to be a "good" individual, who is not risky at all and does not need to be flagged. There are, of course, models that are able to offer a much lower FPR, but we believe that being conservative to a certain degree in the personal loan market is not a bad thing for the banks to do. 0.20 is a very reasonable value that we think fits the specific business case. At the same time, we understand that banks change their business strategies with respect to the loan amount they give out and their financial situation. If a bank is willing to expose itself to a higher degree of risk, we can adjust the model by just changing the threshold.
 
+<img width="966" alt="image" src="https://user-images.githubusercontent.com/63265930/174141748-3d614019-07b1-4b38-a039-5e974c9b3f55.png">
 
+At the current stage, it is very difficult for us to project expected profit that the model will bring in. We need more data on the interest rates/fees that banks charge on their “good” and “bad” customers, the legal process that banks need to go through for each case of default, and the current screening procedure that banks are utilizing. To effectively evaluate the impact of the model, wee can monitor the monthly loan default rate and the cost related to default loan recovery before and after the model is deployed into the screening system. Another option could be conducting a A/B test, with one sample relying on the model for loan screening and the other without it. As more data on loan default rate and cost comes in, we will eventually be able to develop strategies to project the expected benefit of our model.
+
+## Deployment & More
+This model can serve as the first defense for personal loan application for commercial banks in India, where our data comes from. The banks can run their new applicants’ information through the model, and identify those that are “flagged”. Banks can then pass these individuals on to further investigation to see if the model-set flags are justified or not. Those whose flags are “justified” will be handed over to the next department to determine if their applications should be rejected or if they should be given higher interest rates/fees considering their higher chances of defaulting; those who are mistakenly flagged (false positive) will be put back into the general loan application pool.
+
+Models like this do have their shortcomings when we put them into a realistic business situation. Throughout our analysis, we realized that the risk flags will potentially bring biases onto the customers’ profiles, and they might be judged unfairly when interacting with the banks for other services that are not related to loans.
+
+The potential risks associated with our proposed plan is that the banks may become too dependent on the predictive model when evaluating customers’ borrowing risks. Even though our predictive model can predict whether a given client is likely to default or not from a statistical point of view, there are certainly other factors that might affect the final outcomes. In order to mitigate such risk, we still need to collect more information about each individual client from a personal point of view to have a better understanding of the client's behaviors.
 
 
 
