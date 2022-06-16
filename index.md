@@ -4,11 +4,14 @@ Tiancheng Xu, Bryan Huang, Weiqi Li, Yashuo Wang (Gloria), Jose Zuart
 
 Oct 2021
 
-## Role & Main Tasks in the Project
 
+## Summary
+A data science project that analyzes personal demographic data and predicts loan default probability. We worked on over 250k data entries and built multiple models, including K-means, PCA, Logistic Regression, Classification Trees and Random Forests, Lasso Regressions (L1 Regularization). Putting the models back into the actual business situation, we fine-tuned them, compared them using metrics like R-Squared, RMSE and AUC. We reworked the confusion matrix in order to obtain a model that fits the business problem the best. The goal was to identify individuals that tend to default on personal loans, but there’s also a cost when we wrongfully flag a "good" individual that does not default. We balanced the model with the actual business situation. 
 
+---
 
-
+## Role in the Project
+Modeling & Visualization Specialist
 
 ## Business Understanding
 According to information presented by the World Bank, the percentage of nonperforming loans to total gross loans in India has been rising dramatically since 2011. Currently, 7.39% of the total gross loans were nonperforming loans, which is about 200% higher than the level in 2011. Defaulting on a personal loan is generally considered as a civil dispute in India. Once an individual defaults on their loan, banks will have to hand them over to professional recovery agents. Eventually the banks will need to resort to either a “Hair Cut” or the SARFAESI Act to recovery at least part of the loan, a time- and money-consuming process.
